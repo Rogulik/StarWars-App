@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useInfiniteQuery } from 'react-query';
+import React from 'react';
 import Navbar from '../components/Navbar';
 import Subnav from '../components/Subnav';
 

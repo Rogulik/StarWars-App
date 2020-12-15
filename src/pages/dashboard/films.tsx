@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, ChangeEvent} from 'react'
 import { useSelector } from 'react-redux';
 import { useFirestoreConnect, useFirestore } from 'react-redux-firebase'
 import { useQuery } from 'react-query';
 import Container from '../../components/Container'
 import { HeartOutline, Heart } from 'heroicons-react'
 
-const fetchFilms = async (key) => {
+const fetchFilms = async () => {
     const res = await fetch(`http://swapi.dev/api/films/`);
     return res.json();
 }
@@ -14,12 +14,11 @@ const fetchFilms = async (key) => {
 const Films:React.FC = () => {
     const { data, status } = useQuery('films', fetchFilms);
     const [movies,setMovies] = useState([])
-    const [sort,setSort] = useState("")
     const firestore = useFirestore()
     useFirestoreConnect([
       {collection: 'favourites'}
     ])
-    const favourites = useSelector(state => state.firestore.ordered.favourites)
+    const favourites = useSelector((state:any) => state.firestore.ordered.favourites)
 
     useEffect(() => {
       if(status === 'success'){
@@ -27,15 +26,15 @@ const Films:React.FC = () => {
       }
     },[status])
 
-    const onChangeCheckDirector = (e) => {
+    const onChangeCheckDirector = (e:any) => {
       if(e.target.value === 'all'){
         setMovies(data.results)
         return
       }
-      setMovies(data.results.filter(movie => movie.director === e.target.value))
+      setMovies(data.results.filter((movie:any) => movie.director === e.target.value))
     }
 
-    const addTofavourite = (favourite) => {
+    const addTofavourite = (favourite:any) => {
       return firestore.collection('favourites').add(favourite)
     }
  
@@ -61,7 +60,7 @@ const Films:React.FC = () => {
                 <select id='filter' onChange={onChangeCheckDirector} className='px-2 py-1'defaultValue='Choose director'>
                   <option value="Choose director" disabled hidden>Choose director</option>
                   {
-                    [...new Map(data.results.map(item => [item['director'], item])).values()]
+                    [...new Map(data.results.map((item:any) => [item['director'], item])).values()]
                     .map((movie:any) =>(
                       <option 
                       key={movie.title} 
@@ -85,7 +84,7 @@ const Films:React.FC = () => {
                             <a className='mr-2 hover:text-yellow-300'>{title}</a>
                         </Link>
                         <button onClick={e => addTofavourite({ title,director,episode_id,release_date })} className='hover:text-yellow-300'>
-                            {favourites.map(i => i.episode_id).includes(episode_id) ? (
+                            {favourites.map((i:any) => i.episode_id).includes(episode_id) ? (
                               <Heart />
                             ) : (
                               <HeartOutline />

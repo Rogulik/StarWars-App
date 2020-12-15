@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useQuery } from 'react-query'
 import Container from '../../../components/Container'
 
-const fetchFilm = async (key) => {
+const fetchFilm = async (key:any) => {
     const res = await fetch(`http://swapi.dev/api/films/${key.queryKey[1]}`);
     return res.json();
 }

@@ -9,8 +9,8 @@ const Favourites = () => {
     useFirestoreConnect([
         {collection: 'favourites'}
       ])
-      const favourites = useSelector(state => state.firestore.ordered.favourites)
-      const onClickDelete = (id) => {
+      const favourites = useSelector((state:any) => state.firestore.ordered.favourites)
+      const onClickDelete = (id:any) => {
           firestore.collection('favourites').doc(id).delete()
       }
     return (
@@ -23,7 +23,7 @@ const Favourites = () => {
             )}
             {isLoaded(favourites) && favourites.length > 0 && (
                  <ul className="flex flex-col items-center mt-4 text-white">
-                 {favourites.map(({ title,director,episode_id,release_date,id },idx) => (
+                 {favourites.map(({ title,director,episode_id,release_date,id }:any) => (
                      <li 
                      key={id}
                      className="flex items-center justify-center p-2 mb-4 text-xl text-center text-white border-4 rounded-2xl"
