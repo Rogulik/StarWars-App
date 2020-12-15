@@ -7,7 +7,7 @@ import Container from '../../components/Container'
 import { HeartOutline, Heart } from 'heroicons-react'
 
 const fetchFilms = async () => {
-    const res = await fetch(`http://swapi.dev/api/films/`);
+    const res = await fetch(`https://swapi.dev/api/films/`);
     return res.json();
 }
 
