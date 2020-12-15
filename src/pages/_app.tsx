@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+import Head from 'next/head'
 import '../styles/globals.css'
 import { AppProps } from 'next/app'
 import { AuthProvider } from '../contexts/AuthContext'
@@ -14,6 +15,10 @@ const queryClient = new QueryClient()
 
 function App({ Component, pageProps }: AppProps):ReactNode {
   return (
+      <>
+      <Head>
+        <meta httpEquiv="Content-Security-Policy" content="upgrade-insecure-requests"></meta>
+      </Head>
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <AuthProvider>
@@ -27,6 +32,7 @@ function App({ Component, pageProps }: AppProps):ReactNode {
           </AuthProvider>
         </Provider>
       </QueryClientProvider>
+      </>
     )
 }
 
