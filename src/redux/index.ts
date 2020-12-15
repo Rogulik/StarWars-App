@@ -1,6 +1,5 @@
-import { createStore, compose } from 'redux';
+import { createStore } from 'redux';
 import { fbConfig } from '../utils/config'
-import { reduxFirestore } from 'redux-firestore';
 import rootReducer from './reducer'
 import firebase from 'firebase/app';
 import 'firebase/auth';

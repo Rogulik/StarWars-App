@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import firebase from 'firebase'
 import { auth } from '../redux/index';
+import { Context } from 'vm';
 
 interface Value {
     currentUser: firebase.User
@@ -15,9 +16,9 @@ type Props= {
 
 const AuthContext = React.createContext<Value | null>(null);
 
-export const useAuth = () => useContext(AuthContext);
+export const useAuth:any = () => useContext(AuthContext);
 
-export const AuthProvider = ({ children }: Props) => {
+export const AuthProvider = ({ children }:Props) => {
   const [currentUser, setCurrentUser] = useState<any>();
   const [loading, setLoading] = useState(true);
 

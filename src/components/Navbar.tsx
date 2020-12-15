@@ -5,13 +5,13 @@ import { useRouter } from 'next/router'
 import { useSelector } from 'react-redux';
 import { isLoaded, useFirestoreConnect } from 'react-redux-firebase'
 
-const Navbar = () => {
+const Navbar:React.FC = () => {
    const {logout} = useAuth()
    const router = useRouter()
    useFirestoreConnect([
     {collection: 'favourites'}
   ])
-  const favourites = useSelector(state => state.firestore.ordered.favourites)
+  const favourites = useSelector((state:any) => state.firestore.ordered.favourites)
 
    const onClick = async () => {
        try {
